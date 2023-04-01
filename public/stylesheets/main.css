@@ -1,0 +1,114 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Tajawal&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+@property --rotate {
+  syntax: "<angle>";
+  initial-value: 132deg;
+  inherits: false;
+}
+:root {
+  --btnClr: rgb(0, 203, 67);
+  --dark-background: rgba(0, 0, 0, 0.5);
+  --light-background: rgba(255, 255, 255, 0.7);
+  --blur-filter:   saturate(200%) blur(30px);
+}
+
+main{
+  max-width: 1080px;
+  margin: 0 auto;
+  z-index: 1;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: "Noto Sans", sans-serif;
+  background: linear-gradient(
+    var(--rotate),
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 60, 119, 1) 25%,
+    rgba(0, 88, 41, 1) 100%
+  );
+  animation: spin 20s linear infinite;
+}
+@keyframes spin {
+  0% {
+    --rotate: 0deg;
+  }
+  100% {
+    --rotate: 360deg;
+  }
+}
+
+button {
+  color: var(--btnClr);
+  background: none;
+  border: 2px solid;
+  border-radius: 2rem;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.25s;
+}
+
+button:hover {
+  box-shadow: inset 0 -3.25em 0 0 var(--btnClr);
+  filter: hue-rotate(45deg);
+  border-color: var(--btnClr);
+  color: white;
+}
+
+#index-navbar{
+  background-color: var(--dark-background);
+  backdrop-filter:var(--blur-filter);
+  z-index: 9999;
+}
+#logo{
+  max-width: 50px;
+}
+.reverse {
+  box-shadow: inset 0 -3.25em 0 0 var(--btnClr);
+  border-color: var(--btnClr);
+  color: white;
+}
+.sign-form{
+width: 300px;
+z-index: 9999;
+}
+.reverse:hover{
+  box-shadow: none;
+  background: none;
+  border: 2px solid;
+  border-radius: 2rem;
+  font: inherit;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0.5em;
+  padding: 1em 2em;
+  transition: 0.25s;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.dropdown{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.feature-title{
+    color: rgba(0, 0, 0, 0.2);
+    -webkit-text-stroke: 1px white;
+    text-align: center;
+    font-size: 10vw;
+    font-family: 'Catamaran', sans-serif;
+    font-weight: 800;
+}
+@media screen and (max-width: 990px){
+  .sign-form{
+    width: 100%;
+    max-width: 300px;
+  }
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/ScheduleMaster.css">
+</head>
+
+<body>
+    <div id="navbar"></div><!--placeholder-->
+    <main>
+        <div class="container text-white my-5 text-center">
+            <h1 class="feature-title">ScheduleMaster</h1>
+            <p style="font-size: large;">Just insert your courses and let us build your next term Schedule.</p>
+        </div>
+        <div class="card mt-3 d-flex justify-content-center align-center ">
+            <div class="add d-flex flex-row">
+                <select name="Enter your course" placeh class="add-text" id="course-input">
+                <option value="" selected disabled hidden>Enter your course</option>
+                <option value="ICS 202">ICS 202</option>
+                <option value="ICS 253">ICS 253</option>
+                <option value="MATH 001">MATH 001</option>
+                <option value="PHYS 101">PHYS 101</option>
+            </select>
+                <button id="add-course-button" class="reverse" style="padding: 10px;">Add Course</button>
+            </div>
+            
+            <h2>Courses</h2>
+            <div class="table" id="table"></div>
+            <button class="mx-auto">generate</button>
+        </div>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <div class="calendar">
+            <div class="timeline">
+                <div class="spacer"></div>
+                <div class="time-marker"></div>
+                <div class="time-marker">7 AM</div>
+                <div class="time-marker">8 AM</div>
+                <div class="time-marker">9 AM</div>
+                <div class="time-marker">10 AM</div>
+                <div class="time-marker">11 AM</div>
+                <div class="time-marker">12 PM</div>
+                <div class="time-marker">1 PM</div>
+                <div class="time-marker">2 PM</div>
+                <div class="time-marker">3 PM</div>
+                <div class="time-marker">4 PM</div>
+                <div class="time-marker">5 PM</div>
+            </div>
+            <div class="days">
+                <div class="day sun">
+                    <div class="date">
+                        <p class="date-day">Sun</p>
+                    </div>
+                    <div class="events">
+                        <div class="event start-7 end-7 securities">
+                            <p class="title">MATH208</p>
+                            <p class="time">7:00 AM - 7:50 AM</p>
+                        </div>
+                        <div class="event start-8 end-8 securities">
+                            <p class="title">SWE363</p>
+                            <p class="time">8:00 AM - 8:50 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="day mon">
+                    <div class="date">
+                        <p class="date-day">Mon</p>
+                    </div>
+                    <div class="events">
+                        <div class="event start-7 end-7 securities">
+                            <p class="title">MATH208</p>
+                            <p class="time">7:00 AM - 7:50 AM</p>
+                        </div>
+                        <div class="event start-11 end-11 securities">
+                            <p class="title">IAS212</p>
+                            <p class="time">11:00 AM - 11:50 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="day tues">
+                    <div class="date">
+                        <p class="date-day">Tues</p>
+                    </div>
+                    <div class="events">
+                        <div class="event start-7 end-7 securities">
+                            <p class="title">MATH208</p>
+                            <p class="time">7:00 AM - 7:50 AM</p>
+                        </div>
+                        <div class="event start-8 end-8 securities">
+                            <p class="title">SWE363</p>
+                            <p class="time">8:00 AM - 8:50 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="day wed">
+                    <div class="date">
+                        <p class="date-day">Wed</p>
+                    </div>
+                    <div class="events">
+                        <div class="event start-7 end-7 securities">
+                            <p class="title">MATH208</p>
+                            <p class="time">7:00 AM - 7:50 AM</p>
+                        </div>
+                        <div class="event start-11 end-11 securities">
+                            <p class="title">IAS212</p>
+                            <p class="time">11:00 AM - 11:50 AM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="day thurs">
+                    <div class="date">
+                        <p class="date-day">Thurs</p>
+                    </div>
+                    <div class="events">
+                        <div class="event start-7 end-7 securities">
+                            <p class="title">MATH208</p>
+                            <p class="time">7:00 AM - 7:50 AM</p>
+                        </div>
+                        <div class="event start-8 end-8 securities">
+                            <p class="title">SWE363</p>
+                            <p class="time">8:00 AM - 8:50 AM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+    <div id="footer"></div>
+    <script src="/js/ScheduleMaster.js"></script>
+    <script src="/js/components.js"></script>
+    <script src="https://kit.fontawesome.com/06ee9fb9c8.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

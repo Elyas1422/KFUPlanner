@@ -1,0 +1,57 @@
+@import url('main.css');
+
+body{
+  height: 100%;
+  width: 100%;
+}
+main{
+    max-width: 1080px;
+    margin: 0 auto;
+    z-index: 1;
+}
+a:link { text-decoration: none; }
+a:visited { text-decoration: none; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+#goal-card{
+    background-color: var(--dark-background);
+    backdrop-filter:var(--blur-filter);
+    border-radius: 20px;
+}
+  #plan-msg{
+    text-transform: uppercase;
+    background: linear-gradient(to right,#52F6FA,#A1E393,#F0C721);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+  }
+  .feature-container{
+    background-color: var(--dark-background);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: var(--blur-filter);
+    height: 100%;
+  }
+  .feature-container:hover {
+    background-color: #ff7f50;
+    transform: scale(1.05);
+  }
+  #ScheduleMaster-container:hover{
+    background-color: #52f7fa85
+  }
+  #StudyPlanner-container:hover{
+    background-color: #a0e39392
+  }
+  #StudyClock-container:hover{
+    background-color: #f0c721a0
+  }
+  
+  @media screen and (max-width: 990px){
+    #full-logo{
+        max-height:300px ;
+        max-width: 300px;
+    }
+    #goal-card{
+      border-radius: 0px;
+  }
+  }

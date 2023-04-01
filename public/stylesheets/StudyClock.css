@@ -1,0 +1,118 @@
+@import url(main.css);
+
+    .start-button:hover, .state-button:hover{
+        box-shadow: unset;
+        background-color:unset;
+        border-color: unset;
+    }
+    #description {
+    background-color: hsla(0, 100%, 1%, 0.071); 
+    border-radius: 20px;
+    }
+    #clock-logo {
+      width: 500px; 
+      height: 500px;
+    }  
+    /*Define reusable variable of colors within entire docs */
+    :root {
+      --focusTime: linear-gradient( var(--rotate), hsl(223, 24%, 24%), hsl(223, 24%, 24%), hsl(47, 22%, 24%));
+      --shortBreak: linear-gradient( var(--rotate), hsl(47, 22%, 24%), hsl(47, 22%, 24%), hsl(102, 15%, 23%));
+      --longBreak: linear-gradient( var(--rotate), hsl(102, 15%, 23%), hsl(102, 15%, 23%), hsl(223, 24%, 24%));
+      
+      /* Define the gradient using the three colors */
+    }
+    /*Body styling, using focusTime variable*/
+    body {
+      transition: background-color 1s ease; /*Animation*/
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      user-select: none;
+    }
+    
+    /*Design whole tool section*/
+    .timer {
+      padding: 20px;
+      text-align: center;
+      border: solid 0px rgba(245, 222, 179, 0.468);
+      border-radius: 30px;
+      margin: 2em;
+      
+    }
+    /*Design the time specifically */
+    .clock {
+      margin-top: 50px;
+      margin-bottom: 30px;
+      padding:30px;
+      font-size: 10vw;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: arial, sans-serif;
+      background-color: hsla(0, 100%, 1%, 0.071);
+      border-radius: 50px;
+    }
+    /* focus Time - shortBreak - longBreak */
+    .state-button {
+      
+      font-size: 20px;
+      height: 28px;
+      cursor: pointer;
+      box-shadow: none;
+      font-weight: 300;
+      color: #fff;
+      border: 1px solid transparent;
+      margin: 0px;
+      border-radius: 4px;
+      padding: 2px 12px;
+      background: none;
+      border-radius: 20px;
+      padding: 4px 20px;
+      height:40px;
+    }
+    
+    /*while clicked*/
+    .state-button.active {
+      background-color: hsla(0, 100%, 1%, 0.219);
+    }
+    /*Start button*/
+    .start-button {
+      cursor: pointer;
+      box-shadow: rgb(235, 235, 235) 0px 6px 0px;
+      font-size: 2vw;
+      height: 6vh;
+      text-transform: uppercase;
+      color: hsl(175, 26%, 41%);
+      font-weight: bold;
+      width: 20vw;
+      background-color: white;
+      border-width: initial;
+      border-style: none;
+      margin: 20px 0px 0px;
+      padding: 0px 12px;
+      border-radius: 15px;
+      transition: color 0.5s ease-in-out 0s;
+    }
+    
+    button:focus, button:active {
+      outline: none;
+    }
+    
+    .start-button.active {
+      transform: translateY(6px);
+      box-shadow: none;
+      outline: none;
+      color: hsl(0, 54%, 44%);
+    }
+    .clock-container{
+        justify-content: center;
+        align-items: center;
+    }
+    @media screen and (max-width: 990px) {
+        .start-button {
+            width: 50vw;
+            font-size: x-large;
+        }
+        #description{
+            border-radius: 0px;
+        }
+    }
