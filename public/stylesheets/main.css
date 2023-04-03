@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans&family=Tajawal&display=swap");
 @import url('https://fonts.googleapis.com/css?family=Catamaran:400,800');
+@import url('./scrollbar.css');
+
 @property --rotate {
   syntax: "<angle>";
   initial-value: 132deg;
@@ -19,7 +21,8 @@ main{
 }
 
 body {
-  min-height: 100dvh;
+  overflow: overlay;
+  min-height: 100vh;
   font-family: "Noto Sans", sans-serif;
   background: linear-gradient(
     var(--rotate),
@@ -99,11 +102,10 @@ z-index: 9999;
   align-items: center;
 }
 .feature-title{
-    color: rgba(0, 0, 0, 0.2);
-    -webkit-text-stroke: 1px white;
+    color: #FFF;
     text-align: center;
-    font-size: 10vw;
-    font-family: 'Catamaran', sans-serif;
+    font-size: 7vw;
+    font-family: 'Noto Sans', sans-serif;
     font-weight: 800;
 }
 @media screen and (max-width: 990px){
