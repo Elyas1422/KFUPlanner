@@ -10,6 +10,7 @@ const rerun = () => {
 };
 
 const removeRow = (index) => {
+  rows.splice(index,1);
   const row = document.querySelector(`#row-${index}`);
   row.classList.add("removed");
   rowCount -= 1;
@@ -40,15 +41,12 @@ const buildRows = () => {
       </div>`;
   });
 
-  console.log("content", content);
-
   table.innerHTML = content;
 };
 const button = document.querySelector('#add-course-button');
 const comboBox = document.querySelector('#course-input');
 button.addEventListener('click', () => {
   rows.push(comboBox.value);
-  console.log((comboBox.value))
   buildRows();
 });
 
