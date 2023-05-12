@@ -76,35 +76,24 @@
             </div>
           </div>
           <script>
-document.getElementById("login-form").addEventListener("submit", function(event) {
-  event.preventDefault();
-  var email = document.getElementById("dropdownFormEmail").value;
-  var password = document.getElementById("dropdownFormPassword").value;
-
-  var formData = new FormData();
-  formData.append("email",email);
-  formData.append("password", password);
-  
-  
-  var data = {
-    email: email,
-    password: password
-  };
-  fetch(`/login/${email}`, {
-    method: "POST",
-    body: JSON.stringify(data)
-  }).then(function(response) {
-    if (response.ok) {
-      return response.text();
-    } else {
-      throw new Error("Network response was not ok.");
-    }
-  }).then(function(text) {
-    console.log(text);
-  }).catch(function(error) {
-    console.error("Error:", error);
-  });
-});
+            document.getElementById("login-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var email = document.getElementById("dropdownFormEmail").value;
+            var password = document.getElementById("dropdownFormPassword").value;
+            fetch(`/login/${email}/${password}`, {
+              method: "POST"
+            }).then(function(response) {
+              if (response.ok) {
+                return response.text();
+              } else {
+                throw new Error("Network response was not ok.");
+              }
+            }).then(function(text) {
+              console.log(text);
+            }).catch(function(error) {
+              console.error("Error:", error);
+            });
+          });
           </script>
         </nav>
 

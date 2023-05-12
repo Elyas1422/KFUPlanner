@@ -4,6 +4,7 @@ let path = require('path');
 let favicon = require('serve-favicon')
 const bodyParser = require("body-parser");
 let app = express();
+const {login}= require('./models/user_model.js')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,14 +29,17 @@ app.get('/StudyPlanner', (req, res, next) => {
 app.get('/StudyClock', (req, res, next) => {
   res.render('StudyClock')
 })
-app.post("/login/:email", async function(req, res) {
-  const email =  req.body.email;
-  const password = req.body.password;
-  console.log(req.body)
-  console.log("Email: " + email);
-  console.log("Password: " + password);
-
-  res.send("Login successful!");
+app.post("/login/:email/:password", async function(req, res) {
+  const email =  req.params.email;
+  const password = req.params.password;
+  const loginStatus= await login(email,password);
+  console.log(`login trial is ${loginStatus}`)
+  if (loginStatus){
+    res.send("Login successful!");
+  }
+  else{
+    res.send("Login unsuccessful!");
+  }
 });
 
 // catch 404 and forward to error handler
