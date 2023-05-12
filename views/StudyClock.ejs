@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="stylesheets/StudyClock.css" />
   </head>
   <body>
-        <div id="navbar"></div>
+        <%- include('partials/navigation.ejs') %>
 
     
 
@@ -74,12 +74,11 @@
         </p>
     </section>
     </main>
-    <div id="footer"></div>
+    <%- include('partials/footer.ejs') %>
     
     <!--Import main js-->
     <script src="https://kit.fontawesome.com/06ee9fb9c8.js" crossorigin="anonymous"></script>
     <script src="/js/StudyClock.js"></script>
-    <script src="/js/components.js"></script>
     <div id="footer"></div>
   </body>
 </html>

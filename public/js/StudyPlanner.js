@@ -1,5 +1,3 @@
-
-
 let courseList = [{
     'Name': 'Software Project Management',
     'Code': 'SWE387',
@@ -72,7 +70,6 @@ let courseList = [{
   
   function registerCourses() {
     let timetable = generateTimetable(courseList)
-    console.table(timetable)
 
     let rows = table.children[0].children
     let cols = rows[0].children

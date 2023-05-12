@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="navbar"></div><!--placeholder-->
+    <%- include('partials/navigation.ejs') %>
     <main>
         <div class="container text-white my-5 text-center">
             <h1 class="feature-title">Schedule Master</h1>
@@ -129,9 +129,10 @@
                 </div>
             </div>
     </main>
-    <div id="footer"></div>
+    
+    <%- include('partials/footer.ejs') %>
+
     <script src="/js/ScheduleMaster.js"></script>
-    <script src="/js/components.js"></script>
     <script src="https://kit.fontawesome.com/06ee9fb9c8.js" crossorigin="anonymous"></script>
 </body>
 

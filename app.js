@@ -3,57 +3,38 @@ let express = require('express');
 let path = require('path');
 let favicon = require('serve-favicon')
 const bodyParser = require("body-parser");
-let app = express();
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
+let app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
+app.set('view engine', 'ejs');
+
+app.use(favicon(path.join(__dirname,'public','assets','favicon.ico')));
 app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
-app.use(favicon(path.join(__dirname,'public','assets','favicon.ico')));
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json())
 
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
 
-app.get('/', function(req, res, next) {
-  res.render('index');
-});
-app.get('/schedulemaster', (req, res, next) => {
-  res.render('ScheduleMaster')
-})
-app.get('/StudyPlanner', (req, res, next) => {
-  res.render('StudyPlanner')
-})
-app.get('/StudyClock', (req, res, next) => {
-  res.render('StudyClock')
-})
-app.post("/login/:email", async function(req, res) {
-  const email =  req.body.email;
-  const password = req.body.password;
-  console.log(req.body)
-  console.log("Email: " + email);
-  console.log("Password: " + password);
-
-  res.send("Login successful!");
-});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-
-
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  console.error(err.stack);
+  res.status(500).json({
+    error: err.message,
+    stack: err.stack
+  });
 });
 
 app.listen(5000, () => {

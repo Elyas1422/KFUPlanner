@@ -14,7 +14,7 @@
     <title>StudyPlanner</title>
 </head>
   <body>
-    <div id="navbar"></div>
+    <%- include('partials/navigation.ejs') %>
 
     <main>
       <div class="container d-flex flex-column text-white my-5 text-center">
@@ -122,11 +122,11 @@
       </table>
       </div>
     </main>
-    <div id="footer"></div>
+
+    <%- include('partials/footer.ejs') %>
+
     <script src="https://kit.fontawesome.com/06ee9fb9c8.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="module" src="/js/StudyPlanner.js"></script>
-    <script src="/js/components.js"></script>
   </body>
 </html>
-
