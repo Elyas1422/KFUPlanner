@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const {getAllCourses, getCourse} = require('../models/courses');
-const {login, getAllUsers, getUser} = require('../models/user_model')
+const {login, getAllUsers, getUser,addUser} = require('../models/user_model')
 
 router.get('/', async function(req, res, next) {
     var userEmail = req.cookies.user;
@@ -46,6 +46,21 @@ router.post("/login", async function(req, res) {
   }
   else{
       res.status(500).send("Email or Password is wrong");
+  }
+});
+router.post("/signup", async function(req, res) {
+  try{
+    const email = req.body.email;
+    const password = req.body.password;
+    const fname= req.body.fname;
+    const lname =req.body.lname;
+    user= {email: email,password:password,fname:fname,lname:lname};
+    await addUser(user);
+    res.cookie("user", email);
+    res.redirect("/");
+  }
+  catch(error){
+    res.status(500).send("Email already used");
   }
 });
 router.post("/logout", function(req, res) {

@@ -1,8 +1,8 @@
-const { getAllUsers,login, getUser } = require('./user_model');
+const { getAllUsers,login, getUser, addUser } = require('./user_model');
 
 async function main() {
   try {
-    console.log(await getUser("elyasalmubarak@gmail.com"));
+    console.log(await getAllUsers());
   } catch (error) {
     console.error(error);
   }

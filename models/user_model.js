@@ -32,4 +32,20 @@ async function getUser(email){
     return  rows[0];
 }
 
-module.exports = {getAllUsers, login, getUser}
+async function addUser(user_info){
+
+    try{
+        const db = await getDbConnection();
+        const keys = Object.keys(user_info);
+        const columns = keys.join(', ');
+        const values = keys.map(key => `'${user_info[key]}'`).join(', ');
+        const meta = await db.run(`INSERT INTO user (${columns}) VALUES (${values})`);
+        await db.close();
+        return meta;
+    }
+    catch(error){
+        throw new Error("Email exist in the database");
+    }
+}
+
+module.exports = {getAllUsers, login, getUser, addUser}

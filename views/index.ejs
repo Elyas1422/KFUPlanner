@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -74,10 +75,6 @@
                       <label for="signupPassword">Password</label>
                       <input type="password" class="form-control" id="signupPassword" placeholder="Password" required>
                     </div>
-                    <div class="form-group">
-                      <label for="signupConfirmPassword">Confirm Password</label>
-                      <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm Password"  required>
-                    </div>
                     <button type="submit" class="btn btn-primary">Sign Up</button>
                   </form>
                 </div>
@@ -101,7 +98,6 @@
             </ul>
           </div>
         </div>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script>
           document.getElementById("login-form").addEventListener("submit", function(event) {
           event.preventDefault();
@@ -126,6 +122,40 @@
           }).catch(function(error) {
             Toastify({
                 text: "Email or Password is wrong",
+                duration: 1500,
+                gravity: "bottom",
+                position: "center",
+                stopOnFocus: true,
+              }).showToast();
+          });
+          });
+          document.getElementById("signup-form").addEventListener("submit", function(event) {
+          event.preventDefault();
+          var email = document.getElementById("signupEmail").value;
+          var password = document.getElementById("signupPassword").value;
+          var fname= document.getElementById("signupFirstName").value;
+          var lname= document.getElementById("signupLastName").value;
+          var data = {
+            email: email,
+            password: password,
+            fname: fname,
+            lname: lname
+          };
+          fetch(`/signup/`, {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }).then(function(response) {
+            if (response.ok) {
+              location.reload();
+            } else {
+              throw new Error("Network response was not ok.");
+            }
+          }).catch(function(error) {
+            Toastify({
+                text: 'Email is already used',
                 duration: 1500,
                 gravity: "bottom",
                 position: "center",
