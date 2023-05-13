@@ -4,6 +4,7 @@ let path = require('path');
 let favicon = require('serve-favicon')
 const bodyParser = require("body-parser");
 var cookieParser = require('cookie-parser');
+let getAllCourses = require('./models/courses')
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
