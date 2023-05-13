@@ -15,8 +15,12 @@
     <script type="module">
           import { registerCourses, drawChart, colorMapper, addCourse
           , removeCourse, clearTable } from '/js/StudyPlanner.js';
+
+      if (localStorage.getItem('courses') == null) {
+        localStorage.setItem('courses', ('<%- JSON.stringify(courses) %>'))
+      }
       
-      localStorage.setItem('courses', ('<%- JSON.stringify(courses) %>'))
+
       let courses = JSON.parse(localStorage.getItem('courses'))
 
       function processCourses(courses) {
@@ -37,7 +41,7 @@
       event.preventDefault();
 
       var course = document.getElementById('course').value;
-      
+
       fetch('./StudyPlanner/' + course, {
         method: 'GET'
       }).then(response => {
