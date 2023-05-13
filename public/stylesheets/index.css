@@ -45,6 +45,27 @@ a:active { text-decoration: none; }
   #StudyClock-container:hover{
     background-color: #f0c721a0
   }
+  body .toastify {
+    z-index: 99999;
+    position: fixed;
+    padding: 20px 50px;
+    margin-bottom: 30px;
+    margin-left: 20px;
+    font-size: 18px;
+    background: #ff5362;
+    box-shadow: 0 20px 40px rgb(0 0 0 / 4%);
+    border-radius: 10px;
+  }
+  #logout-button {
+    color: #fc3333;
+  }
+  
+  #logout-button:hover {
+    box-shadow: inset 0 -3.25em 0 0 #fc3333;
+    border-color: #fc3333;
+    color: white;
+  }
+  
   
   @media screen and (max-width: 990px){
     #full-logo{
