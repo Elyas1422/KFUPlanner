@@ -26,9 +26,9 @@ body {
   font-family: "Noto Sans", sans-serif;
   background: linear-gradient(
     var(--rotate),
-    rgb(0, 255, 200) 0%,
-    rgb(0, 111, 119) 50%,
-    rgba(0, 203, 67, 1) 100%
+    rgb(0, 80, 63) 0%,
+    rgb(4, 84, 90) 50%,
+    rgb(20, 140, 60) 100%
   );
   animation: spin 20s linear infinite;
 }
