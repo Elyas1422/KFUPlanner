@@ -9,6 +9,14 @@ const timer = {
     //state: blah..
     //Remaining: {?}
   };
+
+  let isReseted = false;
+timer.Remaining = {
+  total: 0,
+  minutes: 0,
+  seconds: 0
+};
+  let isPaused = false;
 let interval;
 // getting the div that contains buttons
 const stateButtons = document.querySelector('#js-state-buttons');
@@ -33,57 +41,66 @@ function getRemaining(endTime) {
   
     return { total, minutes, seconds};
   }
-// set timer, 'make it count from top to zero decreasingly'
-function startTiming() {
-    let { total } = timer.Remaining;//Get total remaining seconds
-    //store the exact time of end session by milli seconds unit ' current + total*1000 '
-    const endTime = Date.parse(new Date()) + total * 1000;
-    
-    // here, I will count each focusTime iteration, so that session increment for auto. sake.
-    if(timer.state === 'focusTime') {
-        timer.sessions++;
-    }
-    //Make that button label changes to stop
-    startButton.dataset.action = 'stop';
-    startButton.textContent = 'stop';
-    startButton.classList.add('active');
-
-    
-    
-    //excuted every iterations 'second'
-    interval = setInterval(function() {
-      timer.Remaining = getRemaining(endTime);
-      updateRemaining();
+  function startTiming() {
+    let { total } = timer.Remaining;
   
-      total = timer.Remaining.total;
+    if (interval) {
+      // Timer is already running, pause it
+      clearInterval(interval);
+      interval = null;
+  
+      isPaused = true;
+      startButton.textContent = 'Continue';
+    } else {
+      // Timer is not running, start it or resume from pause
       if (total <= 0) {
-        clearInterval(interval);//counts ends
-
-        // here to auto switches when count ends 
-        switch (timer.state) {
-            case 'focusTime':
-              if (timer.sessions % timer.longBreakIteration === 0) {
-                switchState('longBreak');
-              } else {
-                switchState('shortBreak');
-              }
-              break;
-            default:
-              switchState('focusTime');
+        // If the remaining time is already 0 or negative, reset the timer
+        resetTiming();
+      } else {
+        const endTime = Date.parse(new Date()) + total * 1000;
+  
+        if (timer.state === 'focusTime') {
+          timer.sessions++;
+        }
+  
+        startButton.dataset.action = 'stop';
+        isPaused = false;
+        isReseted = false;
+        startButton.textContent = 'Pause';
+  
+        interval = setInterval(function () {
+          timer.Remaining = getRemaining(endTime);
+          updateRemaining();
+  
+          total = timer.Remaining.total;
+          if (total <= 0) {
+            clearInterval(interval);
+            switch (timer.state) {
+              case 'focusTime':
+                if (timer.sessions % timer.longBreakIteration === 0) {
+                  switchState('longBreak');
+                } else {
+                  switchState('shortBreak');
+                }
+                break;
+              default:
+                switchState('focusTime');
+            }
+            startTiming();
           }
-    
-          startTiming();
+        }, 1000);
       }
-    }, 1000);//1000 SAYS THAT EVERY SECOND/1000ms
+    }
   }
+  
 
-  //stop the timer
   function stopTiming() {
     clearInterval(interval);
+    interval = null;
   
+    isPaused = false;
     startButton.dataset.action = 'start';
-    startButton.textContent = 'start';
-    startButton.classList.remove('active');
+    startButton.textContent = 'Start';
   }
 
 // update the time UI
@@ -140,6 +157,31 @@ function switchState(state) {
     stopTiming();
   }
 
+  // reset button
+  const resetButton = document.getElementById('js-reset-btn');
+
+  resetButton.addEventListener('click', () => {
+    resetTiming();
+  });
+  
+  function resetTiming() {
+    clearInterval(interval);
+  
+    startButton.dataset.action = 'start';
+    startButton.textContent = 'start';
+    startButton.classList.remove('active');
+  
+    // Reset the timer state and remaining time
+    switchState('focusTime');
+    timer.sessions = 0;
+    timer.Remaining = {
+      total: timer.focusTime * 60,
+      minutes: timer.focusTime,
+      seconds: 0,
+    };
+  
+    updateRemaining();
+  }
 // get the specific button that was clicked 'in state'
 function setState(event) {
   const { state } = event.target.dataset;
