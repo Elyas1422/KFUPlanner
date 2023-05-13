@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3')
 const sqlite = require('sqlite')
 const getDbConnection = async () => {
     return await sqlite.open({
-        filename: 'kfuplanner_users.db3',
+        filename: 'db/kfuplanner_users.db3',
         driver: sqlite3.Database
     })
 }
@@ -25,5 +25,11 @@ async function login(email, password){
         return false;
     }
 }
+async function getUser(email){
+    const db = await getDbConnection();
+    const rows = await db.all(`select email, fname, lname from user where email = '${email}'`)
+    await db.close()
+    return  rows[0];
+}
 
-module.exports = {getAllUsers,login}
+module.exports = {getAllUsers, login, getUser}

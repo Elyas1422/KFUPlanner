@@ -16,10 +16,37 @@
 
 <body>
 
+
+
+
+
+
+
+
+
       <nav class="navbar navbar-expand-lg shadow-sm" id="index-navbar">
         <div class="container">
             <a class="navbar-brand mx-auto" href="/"><img src="/assets/logo.png" alt="Logo" id="logo"></a>
-            
+            <% if (user) { %>
+              <button class="navbar-toggler position-fixed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto my-auto justify-content-center">    
+                  <li class="nav-item dropdown tt">
+                    <p class="text-white my-auto mr-lg-3"> Hi, <%= user['fname'].charAt(0).toUpperCase() + user['fname'].slice(1).toLowerCase(); %></p>
+                  </li>             
+                  <li class="nav-item dropdown tt">
+                    <form action="/logout" method="POST">
+                      <button id="logout-button" type="submit">Log out</button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <% } else { %>
+        
           <button class="navbar-toggler position-fixed" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -74,17 +101,12 @@
             </ul>
           </div>
         </div>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script>
           document.getElementById("login-form").addEventListener("submit", function(event) {
           event.preventDefault();
           var email = document.getElementById("dropdownFormEmail").value;
           var password = document.getElementById("dropdownFormPassword").value;
-
-          var formData = new FormData();
-          formData.append("email",email);
-          formData.append("password", password);
-
-
           var data = {
             email: email,
             password: password
@@ -97,21 +119,23 @@
             body: JSON.stringify(data)
           }).then(function(response) {
             if (response.ok) {
-              return response.text();
+              location.reload();
             } else {
               throw new Error("Network response was not ok.");
             }
-          }).then(function(text) {
-            console.log(text);
           }).catch(function(error) {
-            console.error("Error:", error);
+            Toastify({
+                text: "Email or Password is wrong",
+                duration: 1500,
+                gravity: "bottom",
+                position: "center",
+                stopOnFocus: true,
+              }).showToast();
           });
           });
         </script>
+         <% } %>
       </nav>
-
-
-
 
 
     <main class="mx-auto">

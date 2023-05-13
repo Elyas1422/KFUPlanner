@@ -1,11 +1,8 @@
-const { getAllUsers,login } = require('./user_model');
+const { getAllUsers,login, getUser } = require('./user_model');
 
 async function main() {
   try {
-    var formData = new FormData();
-    formData.append("email", "email");
-    formData.append("password", "password");
-    console.log(formData);
+    console.log(await getUser("elyasalmubarak@gmail.com"));
   } catch (error) {
     console.error(error);
   }

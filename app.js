@@ -18,6 +18,7 @@ app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json())
+app.use(cookieParser());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

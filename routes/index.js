@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
-const {login} = require('../models/user_model')
-router.get('/', function(req, res, next) {
-    res.render('index');
+const {login, getAllUsers, getUser} = require('../models/user_model')
+router.get('/', async function(req, res, next) {
+    var userEmail = req.cookies.user;
+    var user= await getUser(userEmail);
+    if (user) {
+      // User is logged in, show logout button and user email
+      res.render("index", { user: user });
+    } else {
+      // User is not logged in, show login button
+      res.render("index", { user: null });
+    }
   });
   
 router.get('/schedulemaster', (req, res, next) => {
@@ -17,13 +25,20 @@ router.get('/StudyClock', (req, res, next) => {
     res.render('StudyClock')
 })
 
-router.post("/login", function(req, res) {
-    
-    const username = req.body.email;
+router.post("/login", async function(req, res) {
+    const email = req.body.email;
     const password = req.body.password;
-    console.log(username)
-    console.log(password)
-    res.send('Success')
+    if (await login(email,password)){
+        res.cookie("user", email);
+        res.redirect("/");
+    }
+    else{
+        res.status(500).send("Email or Password is wrong");
+    }
 });
+router.post("/logout", function(req, res) {
+    res.clearCookie("user");
+    res.redirect("/");
+  });
 
 module.exports = router
