@@ -20,19 +20,18 @@
         </div>
         <div class="card mt-3 d-flex justify-content-center align-center ">
             <div class="add d-flex flex-row">
-                <select name="Enter your course" placeh class="add-text" id="course-input">
+                <select name="Enter your course" class="add-text" id="course-input">
                 <option value="" selected disabled hidden>Enter your course</option>
-                <option value="ICS 202">ICS 202</option>
-                <option value="ICS 253">ICS 253</option>
-                <option value="MATH 001">MATH 001</option>
-                <option value="PHYS 101">PHYS 101</option>
+                <% courses.forEach((course) => { %>
+                    <option value="<%= course.code %>"><%= course.code %></option>
+                    <% }); %>
             </select>
                 <button id="add-course-button" class="reverse" style="padding: 10px;">Add Course</button>
             </div>
             
             <h2>Courses</h2>
             <div class="table" id="table"></div>
-            <button class="mx-auto">generate</button>
+            <button class="mx-auto">Generate</button>
         </div>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <div class="calendar">

@@ -17,17 +17,23 @@
           , removeCourse, clearTable } from '/js/StudyPlanner.js';
 
       if (localStorage.getItem('courses') == null) {
-        localStorage.setItem('courses', ('<%- JSON.stringify(courses) %>'))
+        localStorage.setItem('courses', '[]')
       }
       
 
       let courses = JSON.parse(localStorage.getItem('courses'))
-
       function processCourses(courses) {
         colorMapper(courses)
         clearTable()
+
+        let header = document.querySelector("#tableHeader")
+        let totalHours = 0
+        courses.forEach(course => {
+          totalHours += course.credit
+        });
+        header.innerHTML = "Study Schedule: " + totalHours + " Hours"
+
         window.addEventListener('load', registerCourses(courses));
-        
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(function() {
         drawChart(courses)
@@ -41,8 +47,10 @@
       event.preventDefault();
 
       var course = document.getElementById('course').value;
+      var action = event.submitter.value
 
-      fetch('./StudyPlanner/' + course, {
+      if (action == 'add') {
+        fetch('./StudyPlanner/' + course, {
         method: 'GET'
       }).then(response => {
         return response.json()
@@ -51,6 +59,14 @@
         courses = JSON.parse(localStorage.getItem('courses'))
         processCourses(courses)
         });
+      }
+
+      if (action == 'remove') {
+        removeCourse(course)
+        courses = JSON.parse(localStorage.getItem('courses'))
+        processCourses(courses)
+      }
+
       })
       </script>
     <title>StudyPlanner</title>
@@ -77,7 +93,7 @@
                 <input type="text" id="course" name="course" placeholder="e.g. ICS123"><br>
           
                 <button type="submit" name="action" class="btn btn-success" value="add">Add</button>
-                <button type="button" class="btn btn-danger" value="remove">Remove</button>
+                <button type="submit" class="btn btn-danger" value="remove">Remove</button>
               </form>
             </div>
           </div>
@@ -87,7 +103,7 @@
       </div>
       </div>
       <!-- / College Timetable -->
-      <div class="text-white text-center"><h1>MY STUDY SCHEDULE</h1></div>
+      <div class="text-white text-center"><h1 id="tableHeader"></h1></div>
       <div id="table-container">
       <table class="center">
         <tr class='days'>

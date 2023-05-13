@@ -16,15 +16,13 @@ router.get('/', async function(req, res, next) {
     }
   });
   
-router.get('/schedulemaster', (req, res, next) => {
-    res.render('ScheduleMaster')
+router.get('/schedulemaster', async (req, res, next) => {
+    let courses = await getAllCourses();
+    res.render('ScheduleMaster', {courses: courses})
 })
 
 router.get('/StudyPlanner', async (req, res, next) => {
-    let courses = await getAllCourses();
-    courses = courses.slice(0, 5)
-    
-    res.render('StudyPlanner', {courses: courses})
+    res.render('StudyPlanner')
 })
 
 router.get('/StudyPlanner/:code', async (req, res, next) => {
