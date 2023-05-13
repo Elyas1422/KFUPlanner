@@ -92,6 +92,25 @@
       border-radius: 15px;
       transition: color 0.5s ease-in-out 0s;
     }
+
+    /*Reset button*/
+    .reset-button {
+      cursor: pointer;
+      box-shadow: rgb(230, 229, 229) 0px 6px 0px;
+      font-size: 1.5vw;
+      height: 5.8vh;
+      text-transform: uppercase;
+      color: hsl(175, 72%, 13%);
+      font-weight: bold;
+      width: 8.6vw;
+      background-color: rgb(255, 252, 252);
+      border-width: initial;
+      border-style: none;
+      margin: 20px 20px 20px;
+      padding: 0px 12px;
+      border-radius: 15px;
+      transition: color 0.5s ease-in-out 0s;
+    }
     
     button:focus, button:active {
       outline: none;
@@ -109,9 +128,13 @@
     }
     @media screen and (max-width: 990px) {
         .start-button {
-            width: 50vw;
+            width: 40vw;
             font-size: x-large;
         }
+        .reset-button {
+          width: 18vw;
+          font-size: x-large;
+      }
         #description{
             border-radius: 0px;
         }
