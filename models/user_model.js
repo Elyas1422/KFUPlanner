@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3')
 const sqlite = require('sqlite')
 const getDbConnection = async () => {
     return await sqlite.open({
-        filename: '/db/kfuplanner_users.db3',
+        filename: 'db/kfuplanner_users.db3',
         driver: sqlite3.Database
     })
 }

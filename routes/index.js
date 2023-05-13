@@ -26,18 +26,19 @@ router.get('/StudyClock', (req, res, next) => {
 })
 
 router.post("/login", async function(req, res) {
-    const email = req.body.email;
-    const password = req.body.password;
-    console.log(login(username, password))
-    res.send('Success')
+  const email = req.body.email;
+  const password = req.body.password;
+  if (await login(email,password)){
+      res.cookie("user", email);
+      res.redirect("/");
+  }
+  else{
+      res.status(500).send("Email or Password is wrong");
+  }
 });
-
-router.post("/signup", function(req, res) {
-    
-    const username = req.body.email;
-    const password = req.body.password;
-    console.log(username, password)
-    res.send('Success')
+router.post("/logout", function(req, res) {
+  res.clearCookie("user");
+  res.redirect("/");
 });
 
 module.exports = router
