@@ -21,8 +21,15 @@ router.post("/login", function(req, res) {
     
     const username = req.body.email;
     const password = req.body.password;
-    console.log(username)
-    console.log(password)
+    console.log(login(username, password))
+    res.send('Success')
+});
+
+router.post("/signup", function(req, res) {
+    
+    const username = req.body.email;
+    const password = req.body.password;
+    console.log(username, password)
     res.send('Success')
 });
 
