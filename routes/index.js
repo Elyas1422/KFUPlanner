@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
+
+const {getAllCourses, getCourse} = require('../models/courses');
 const {login, getAllUsers, getUser} = require('../models/user_model')
+
 router.get('/', async function(req, res, next) {
     var userEmail = req.cookies.user;
     var user= await getUser(userEmail);
@@ -20,6 +23,7 @@ router.get('/schedulemaster', (req, res, next) => {
 router.get('/StudyPlanner', async (req, res, next) => {
     let courses = await getAllCourses();
     courses = courses.slice(0, 5)
+    
     res.render('StudyPlanner', {courses: courses})
 })
 

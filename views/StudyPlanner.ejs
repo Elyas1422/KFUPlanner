@@ -16,6 +16,7 @@
           import { registerCourses, drawChart, colorMapper, addCourse
           , removeCourse, clearTable } from '/js/StudyPlanner.js';
       
+      localStorage.setItem('courses', ('<%- JSON.stringify(courses) %>'))
       let courses = JSON.parse(localStorage.getItem('courses'))
 
       function processCourses(courses) {
@@ -64,14 +65,15 @@
         <div class="col-md-4 mx-auto">
           <div class="card  text-center">
             <div class="card-header bg-info text-white text-center">
-              <h3 class="card-title mb-0">Add Course</h3>
+              <h3 class="card-title mb-0">Add/Remove Course</h3>
             </div>
             <div class="card-body">
               <form id="course-form">
                 <label for="course">Course:</label>
                 <input type="text" id="course" name="course" placeholder="e.g. ICS123"><br>
           
-                <button type="submit" id="submit-btn" class="btn btn-success">Add</button>
+                <button type="submit" name="action" class="btn btn-success" value="add">Add</button>
+                <button type="button" class="btn btn-danger" value="remove">Remove</button>
               </form>
             </div>
           </div>
